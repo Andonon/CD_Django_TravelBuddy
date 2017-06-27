@@ -1,8 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect, reverse
+from ..login import views
 
 # Create your views here.
+def checklogin(request):
+    try:
+        request.session['id']
+    except KeyError:
+        request.session.flush()
+        messages.error(request, 'Oh Snap! There is no session cookie detected, please login.')
+        return False
+    return True
+
 def index(request):
-    return render(request, 'travels/index.html' )
+    ''' Main landing page for the Travels app
+    '''
+    if checklogin(request):
+        return render(request, 'travels/index.html')
+    else: 
+        return redirect('/')

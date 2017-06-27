@@ -1,1 +1,23 @@
-Hello
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Main Page</title>
+    <meta description='Main Page for LoginReg App'>
+    <meta charset='utf-8'/>
+</head>
+<body>
+    <div id='wrapper'>
+        <h3> Welcome to the Travels App, {{ request.session.name }}... </h3>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'auth:logout' %}" method="GET">
+            <button>Logout</button>
+        </form>
+    </div>
+</body>
+</html>

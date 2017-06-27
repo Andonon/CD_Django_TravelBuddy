@@ -30,7 +30,7 @@ def login(request):
         request.session['id'] = user.id
         request.session['username'] = user.username
         request.session['name'] = user.name
-    return redirect('/mainpage')
+    return redirect('/travels')
 
 def logout(request):
     request.session.flush()
