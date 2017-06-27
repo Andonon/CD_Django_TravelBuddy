@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id='wrapper'>
-        <h3> Welcome to the Travels App, {{ request.session.name }}... </h3>
+        <h2> Welcome to the Travels App, {{ request.session.name }}... </h2>
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -16,23 +16,54 @@
             </ul>
         {% endif %}
         <div id=yourtripschedules>
-            <table>
-                <tr> 
-                    <th>Destination</th>
-                    <th>Travel Start Date</th>
-                    <th>Travel End Date</th>
-                    <th>Plan</th>
-                </tr>
-                {% for each in mytrips %}
-                    <li>
-                        <td>{{ each.name }}</td>
-                        <td>{{ each.traveldatefrom }}</td>
-                        <td>{{ each.traveldateto }}</td>
-                        <td>{{ each.description }}</td>
-                    </li>
-                {% endfor %}
+            <h3>Your trip schedules</h3>
+            <table id="yourtriptable">
+                {% if mytrips %}
+                    <tr> 
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </tr>
+                        {% for each in mytrips %}
+                            <li>
+                                <td>{{ each.name }}</td>
+                                <td>{{ each.traveldatefrom }}</td>
+                                <td>{{ each.traveldateto }}</td>
+                                <td>{{ each.description }}</td>
+                            </li>
+                        {% endfor %}
+                {% else %}
+                    <p>No Data</p>
+                {% endif %}
             </table>
         </div>
+        <div id="otherstripschedules">
+            <h3>Others trip schedules</h3>
+               <table id="otherstriptable">
+                {% if mytrips %}
+                    <tr> 
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </tr>
+                        {% for each in mytrips %}
+                            <li>
+                                <td>{{ each.name }}</td>
+                                <td>{{ each.traveldatefrom }}</td>
+                                <td>{{ each.traveldateto }}</td>
+                                <td>{{ each.description }}</td>
+                            </li>
+                        {% endfor %}
+                {% else %}
+                    <p>No Data</p>
+                {% endif %}
+            </table>
+        </div>
+        <form action="{% url 'travels:addplan' %}" method="GET">
+            <button>Add Travel Plan</button>
+        </form><br>
         <form action="{% url 'auth:logout' %}" method="GET">
             <button>Logout</button>
         </form>
