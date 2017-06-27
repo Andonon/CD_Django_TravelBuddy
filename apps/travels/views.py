@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from ..login import views
+from models import Destination
 
 # Create your views here.
 def checklogin(request):
@@ -18,6 +19,11 @@ def index(request):
     ''' Main landing page for the Travels app
     '''
     if checklogin(request):
-        return render(request, 'travels/index.html')
+        mytrips = Destination.objects.all()
+        print mytrips
+        context = {
+            mytrips: mytrips
+        }
+        return render(request, 'travels/index.html', context)
     else: 
         return redirect('/')
