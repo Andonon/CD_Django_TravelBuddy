@@ -17,49 +17,50 @@
         {% endif %}
         <div id=yourtripschedules>
             <h3>Your trip schedules</h3>
+            {% if mytrips %}
             <table id="yourtriptable">
-                {% if mytrips %}
-                    <tr> 
-                        <th>Destination</th>
-                        <th>Travel Start Date</th>
-                        <th>Travel End Date</th>
-                        <th>Plan</th>
-                    </tr>
-                        {% for each in mytrips %}
-                            <li>
-                                <td>{{ each.name }}</td>
-                                <td>{{ each.traveldatefrom }}</td>
-                                <td>{{ each.traveldateto }}</td>
-                                <td>{{ each.description }}</td>
-                            </li>
-                        {% endfor %}
-                {% else %}
-                    <p>No Data</p>
-                {% endif %}
+                <tr> 
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Plan</th>
+                </tr>
+                {% for each in mytrips %}
+                <tr>                    
+                    <td>{{ each.name }}</td>
+                    <td>{{ each.traveldatefrom }}</td>
+                    <td>{{ each.traveldateto }}</td>
+                    <td>{{ each.description }}</td>
+                </tr>
+                {% endfor %}
             </table>
+            {% else %}
+                <p>No Data</p>
+            {% endif %}
         </div>
         <div id="otherstripschedules">
             <h3>Others trip schedules</h3>
-               <table id="otherstriptable">
-                {% if mytrips %}
+            {% if mytrips %}
+                <table id="yourtriptable">
                     <tr> 
                         <th>Destination</th>
                         <th>Travel Start Date</th>
                         <th>Travel End Date</th>
                         <th>Plan</th>
                     </tr>
-                        {% for each in mytrips %}
-                            <li>
-                                <td>{{ each.name }}</td>
-                                <td>{{ each.traveldatefrom }}</td>
-                                <td>{{ each.traveldateto }}</td>
-                                <td>{{ each.description }}</td>
-                            </li>
-                        {% endfor %}
+                    {% for each in mytrips %}
+                    <tr>                    
+                        <td>{{ each.name }}</td>
+                        <td>{{ each.traveldatefrom }}</td>
+                        <td>{{ each.traveldateto }}</td>
+                        <td>{{ each.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 {% else %}
                     <p>No Data</p>
-                {% endif %}
-            </table>
+                </table>
+            {% endif %}
         </div>
         <form action="{% url 'travels:addplan' %}" method="GET">
             <button>Add Travel Plan</button>

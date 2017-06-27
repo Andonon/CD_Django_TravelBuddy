@@ -16,6 +16,7 @@
             </ul>
         {% endif %}
         <form action="{% url 'travels:addplan' %}" method="POST">
+            {% csrf_token %}
             <label for="destination">Destination: </label>
             <input type="text" name="destination">
             <label for="description">Description: </label>

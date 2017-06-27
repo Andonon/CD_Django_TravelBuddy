@@ -20,9 +20,9 @@ def index(request):
     '''
     if checklogin(request):
         mytrips = Destination.objects.all()
-        print mytrips
+        print "*"*50, mytrips, "*"*50
         context = {
-            mytrips: mytrips
+            'mytrips': mytrips
         }
         return render(request, 'travels/index.html', context)
     else: 
@@ -32,6 +32,19 @@ def addplan(request):
     ''' This is the landing page to add travel plans
     '''
     if checklogin(request):
-        return render(request, 'travels/addplan.html')
+        if request.method == "POST":
+            print "*"*150, request.POST, "*"*150
+            plandata = {
+                'destination': request.POST['destination'],
+                'description': request.POST['description'],
+                'traveldatefrom': request.POST['traveldatefrom'],
+                'traveldateto': request.POST['traveldateto'],
+                'planned_by': request.session['id']
+            }
+            newtravelplanvalidate = Destination.objects.newtravelplanvalidate(plandata)
+            return redirect('/travels')
+        else: 
+            return render(request, 'travels/addplan.html')
     else:
         return redirect('/')
+

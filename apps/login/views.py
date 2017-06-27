@@ -36,12 +36,4 @@ def logout(request):
     request.session.flush()
     messages.success(request, 'Logged Out')
     return redirect('/')
-
-def mainpage(request):
-    try:
-        request.session['id']
-    except KeyError:
-        request.session.flush()
-        messages.error(request, 'Oh Snap! There is no user session detected, please login.')
-        return redirect('/')
-    return render(request, 'login/mainpage.html')
+    
