@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-        <title>Login and Registeration</title>
-        <meta description='Main Page for Login and Registration App'>
+        <title>Travel Buddy App</title>
+        <meta description='Main Login and Register Page for Travel Buddy App'>
         <meta charset='utf-8'/>
     </head>
     <body>
         <div id='wrapper'>
-            <h3>Register</h3>
+            <h3>Register for Travel Buddy.</h3>
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
@@ -17,30 +17,29 @@
             {% endif %}
             <form action="/register" id="registerform" method="post">
                 {% csrf_token %}
-                <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" placeholder="Enter first name here..."><br><br>
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" placeholder="Enter last name here..."><br><br>
-                <label for="email">Email:</label>
-                <input type="text" name="email" placeholder="Enter email here..."><br><br>
+                <label for="name">Name:</label>
+                <input type="text" name="name"><br><br>
+                <label for="username">Username:</label>
+                <input type="text" name="username"><br><br>
                 <label for="userpassword">Password:</label>
-                <input type="password" name="userpassword" placeholder="Enter password here..."><br><br>
+                <input type="password" name="userpassword"><br><br>
                 <label for="cpassword">Confirm Password:</label>
-                <input type="password" name="cpassword" placeholder="Re-enter password here..."><br><br>
+                <input type="password" name="cpassword"><br>
+                <p><font size='2'><i>*Password should be at least 8 characters</i></font></p>
                 <input type="submit" name="registerbutton" value="Register">
             </form> 
             <h3>Login</h3>
             <form action="/login" id="loginform" method="post">
                 {% csrf_token %}
-                <label for="email">Email:</label>
-                <input type="text" name="email" placeholder="Enter email here..."><br><br>
+                <label for="username">Username:</label>
+                <input type="text" name="username"><br><br>
                 <label for="userpassword">Password:</label>
-                <input type="password" name="userpassword" placeholder="Enter password here..."><br><br>
+                <input type="password" name="userpassword"><br><br>
                 <input type="submit" name="registerbutton" value="Login">
             </form> 
             <h3>Already Logged In?:</h3>
             <form action="/mainpage">
-                <button>Go to Main Page</button>
+                <button>Go to Travels Page</button>
             </form>         
         </div>
     </body>

@@ -28,9 +28,8 @@ def login(request):
     else:
         user = User.objects.get(id=results['user'])
         request.session['id'] = user.id
-        request.session['useremail'] = user.email
-        request.session['first_name'] = user.first_name
-        request.session['last_name'] = user.last_name
+        request.session['username'] = user.username
+        request.session['name'] = user.name
     return redirect('/mainpage')
 
 def logout(request):
@@ -39,10 +38,10 @@ def logout(request):
     return redirect('/')
 
 def mainpage(request):
-    # try:
-    #     request.session['useremail']
-    # except KeyError:
-    #     request.session.flush()
-    #     messages.error(request, 'Oh Snap! There is no session cookie detected, please login.')
-    #     return redirect('/')
+    try:
+        request.session['id']
+    except KeyError:
+        request.session.flush()
+        messages.error(request, 'Oh Snap! There is no user session detected, please login.')
+        return redirect('/')
     return render(request, 'login/mainpage.html')
