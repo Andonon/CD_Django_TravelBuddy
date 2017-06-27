@@ -19,7 +19,8 @@ def index(request):
     ''' Main landing page for the Travels app
     '''
     if checklogin(request):
-        mytrips = Destination.objects.all()
+        mytrips = Destination.objects.filter(planned_by=request.session['id'])
+        otherstrips = Destination.objects.all().exclude(planned_by=request.session['id'])
         print "*"*50, mytrips, "*"*50
         context = {
             'mytrips': mytrips

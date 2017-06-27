@@ -40,7 +40,7 @@
         </div>
         <div id="otherstripschedules">
             <h3>Others trip schedules</h3>
-            {% if mytrips %}
+            {% if otherstrips %}
                 <table id="yourtriptable">
                     <tr> 
                         <th>Destination</th>
@@ -48,7 +48,7 @@
                         <th>Travel End Date</th>
                         <th>Plan</th>
                     </tr>
-                    {% for each in mytrips %}
+                    {% for each in otherstrips %}
                     <tr>                    
                         <td>{{ each.name }}</td>
                         <td>{{ each.traveldatefrom }}</td>
