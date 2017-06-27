@@ -27,3 +27,11 @@ def index(request):
         return render(request, 'travels/index.html', context)
     else: 
         return redirect('/')
+
+def addplan(request): 
+    ''' This is the landing page to add travel plans
+    '''
+    if checklogin(request):
+        return render(request, 'travels/addplan.html')
+    else:
+        return redirect('/')

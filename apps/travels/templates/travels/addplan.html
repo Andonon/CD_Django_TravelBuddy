@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Main Page</title>
+    <meta description='Main Page for LoginReg App'>
+    <meta charset='utf-8'/>
+</head>
+<body>
+    <div id='wrapper'>
+        <h2> Welcome to the Travels App, {{ request.session.name }}... </h2>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'travels:addplan' %}" method="POST">
+            <label for="destination">Destination: </label>
+            <input type="text" name="destination">
+            <label for="description">Description: </label>
+            <input type="text" name="description">
+            <label for="traveldatefrom">Travel Date From: </label>
+            <input type="date" name="traveldatefrom">
+            <label for="traveldateto">Travel Date To: </label>
+            <input type="date" name="traveldateto">
+            <br><br>
+            <input type="submit" name="submit" value="Add Travel Plan">
+        </form><br>
+        <form action="{% url 'auth:logout' %}" method="GET">
+            <button>Logout</button>
+        </form>
+    </div>
+</body>
+</html>
