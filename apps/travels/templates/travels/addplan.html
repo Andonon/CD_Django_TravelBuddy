@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <title>Main Page</title>
-    <meta description='Main Page for LoginReg App'>
+    <title>Add Travel Plans</title>
+    <meta description='Add Travel Plans for TravelBuddy App'>
     <meta charset='utf-8'/>
 </head>
 <body>
     <div id='wrapper'>
-        <h2> Welcome to the Travels App, {{ request.session.name }}... </h2>
+        <h2> Add you travel plan {{ request.session.name }}... </h2>
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}

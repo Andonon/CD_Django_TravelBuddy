@@ -25,12 +25,12 @@
                     <th>Travel End Date</th>
                     <th>Plan</th>
                 </tr>
-                {% for each in mytrips %}
+                {% for trip in mytrips %}
                 <tr>                    
-                    <td>{{ each.name }}</td>
-                    <td>{{ each.traveldatefrom }}</td>
-                    <td>{{ each.traveldateto }}</td>
-                    <td>{{ each.description }}</td>
+                    <td><a href="{% url 'travels:viewplan' trip.id %}">{{ trip.name }}</a></td>
+                    <td>{{ trip.traveldatefrom }}</td>
+                    <td>{{ trip.traveldateto }}</td>
+                    <td>{{ trip.description }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -47,6 +47,7 @@
                         <th>Travel Start Date</th>
                         <th>Travel End Date</th>
                         <th>Plan</th>
+                        {% comment %}<th>Do you want to join?</th>{% endcomment %}
                     </tr>
                     {% for each in otherstrips %}
                     <tr>                    
@@ -54,6 +55,7 @@
                         <td>{{ each.traveldatefrom }}</td>
                         <td>{{ each.traveldateto }}</td>
                         <td>{{ each.description }}</td>
+                        {% comment %}<td>{% url 'travels:join' %}{% endcomment %}
                     </tr>
                     {% endfor %}
                 </table>

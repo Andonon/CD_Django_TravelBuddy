@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Main Page</title>
+    <meta description='Main Page for LoginReg App'>
+    <meta charset='utf-8'/>
+</head>
+<body>
+    <div id='wrapper'>
+        <h2> Trip Details. </h2>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if trips %}
+            <h3>{{trips.name}}</h3>
+            <h4>Planned By:</h4><p>{{trips.planned_by.name}}</p>
+            <h4>The plan:</h4><p>{{trips.description}}</p>
+            <h4>Departure date:</h4><p>{{trips.traveldatefrom}}</p>
+            <h4>Return date:</h4><p>{{trips.traveldateto}}</p><br>
+        {% endif %}
+
+        <h3>Other users' joining the trip:</h3>
+        {% for participant in participants %}
+            <p>{{participant.name}}</p>
+        {% endfor %}
+
+        <form action="{% url 'travels:index' %}" method="GET">
+            <button><<< Back </button>
+        </form>        
+        <form action="{% url 'auth:logout' %}" method="GET">
+            <button>Logout</button>
+        </form>
+    </div>
+</body>
+</html>

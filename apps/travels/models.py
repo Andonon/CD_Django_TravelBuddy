@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from datetime import datetime
 from django.db import models
+from ..login.models import User
 
 # Create your models here.
 class DestinationManager(models.Manager):
@@ -37,6 +38,7 @@ class DestinationManager(models.Manager):
                 traveldatefrom=postdata['traveldatefrom'],
                 traveldateto=postdata['traveldateto'],
                 planned_by_id=postdata['planned_by'])
+            createtrip.participants.add(postdata['planned_by'])
             return results
 
 
@@ -50,5 +52,5 @@ class Destination(models.Model):
     planned_by = models.ForeignKey('login.User', related_name="UsersDestinations")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    participants = models.ManyToManyField('login.User', related_name="allparticipants")
+    participants = models.ManyToManyField(User, related_name="travel")
     objects = DestinationManager()

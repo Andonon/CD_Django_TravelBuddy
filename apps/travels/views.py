@@ -19,22 +19,17 @@ def index(request):
     ''' Main landing page for the Travels app
     '''
     if checklogin(request):
-        alltrips = Destination.objects.all()
         mytrips = Destination.objects.all().filter(planned_by=request.session['id'])
         otherstrips = Destination.objects.all().exclude(planned_by=request.session['id'])
-        print request.session['id']
-        print alltrips
-        print mytrips
-        print otherstrips
         context = {
             'mytrips': mytrips,
             'otherstrips': otherstrips
         }
         return render(request, 'travels/index.html', context)
-    else: 
+    else:
         return redirect('/')
 
-def addplan(request): 
+def addplan(request):
     ''' This is the landing page to add travel plans
     '''
     if checklogin(request):
@@ -52,8 +47,17 @@ def addplan(request):
                     messages.error(request, error)
                 return redirect('/travels/addplan')
             return redirect('/travels')
-        else: 
+        else:
             return render(request, 'travels/addplan.html')
     else:
         return redirect('/')
+
+def viewplan(request, trip_id):
+    print 'viewplan works'
+    trip = Destination.objects.get(id=trip_id)
+    context = {
+        'trips': trip,
+        'participants': trip.participants.all()
+    }
+    return render(request,'travels/viewplan.html', context)
 
