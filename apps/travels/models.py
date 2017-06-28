@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import datetime
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
 class DestinationManager(models.Manager):
     def newtravelplanvalidate(self, postdata):
-        print "*"*150, postdata, "*"*150
         results = {'status':True, 'errors':[]}
         if not postdata['destination'] or len(postdata['destination']) < 0:
             results['errors'].append("Destination is missing.")
@@ -15,20 +14,21 @@ class DestinationManager(models.Manager):
             results['errors'].append("Description is missing.")
             results['status'] = False
         if not postdata['traveldatefrom']:
-            results['errors'].append("Travel From Date is missing.")
+            results['errors'].append("Travel Departure Date is missing.")
             results['status'] = False
+        else:
+            if datetime.strptime(postdata['traveldatefrom'], "%Y-%m-%d") < datetime.today():
+                results['errors'].append("Travel Departure Date must be in the future.")
+                results['status'] = False
         if not postdata['traveldateto']:
-            results['errors'].append("Travel To Date is missing.")
+            results['errors'].append("Travel Return Date is missing.")
             results['status'] = False
-        ####### I DOn't know how to get date comparisons working ###
-        # if postdata['traveldateto']:
-        #     results['errors'].append("Travel From Date must be in the future.")
-        #     results['status'] = False
-        # if postdata['traveldatefrom']: 
-        #     results['errors'].append("Travel To Date must be after Travel From date.")
-        #     results['status'] = False
-        # if results['status'] is False:
-        if results['status'] is False: 
+        else:
+            if datetime.strptime(postdata['traveldateto'], "%Y-%m-%d") \
+            < datetime.strptime(postdata['traveldatefrom'], "%Y-%m-%d"):
+                results['errors'].append("Travel Return Date must be after departure date.")
+                results['status'] = False
+        if results['status'] is False:
             return results
         else:
             createtrip = Destination.objects.create(

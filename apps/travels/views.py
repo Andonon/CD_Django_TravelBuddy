@@ -43,6 +43,10 @@ def addplan(request):
                 'planned_by': request.session['id']
             }
             newtravelplanvalidate = Destination.objects.newtravelplanvalidate(plandata)
+            if newtravelplanvalidate['status'] is False:
+                for error in newtravelplanvalidate['errors']:
+                    messages.error(request, error)
+                return redirect('/travels/addplan')
             return redirect('/travels')
         else: 
             return render(request, 'travels/addplan.html')
