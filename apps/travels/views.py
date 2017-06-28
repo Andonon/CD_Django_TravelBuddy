@@ -19,11 +19,16 @@ def index(request):
     ''' Main landing page for the Travels app
     '''
     if checklogin(request):
-        mytrips = Destination.objects.filter(planned_by=request.session['id'])
+        alltrips = Destination.objects.all()
+        mytrips = Destination.objects.all().filter(planned_by=request.session['id'])
         otherstrips = Destination.objects.all().exclude(planned_by=request.session['id'])
-        print "*"*50, mytrips, "*"*50
+        print request.session['id']
+        print alltrips
+        print mytrips
+        print otherstrips
         context = {
-            'mytrips': mytrips
+            'mytrips': mytrips,
+            'otherstrips': otherstrips
         }
         return render(request, 'travels/index.html', context)
     else: 
@@ -34,7 +39,6 @@ def addplan(request):
     '''
     if checklogin(request):
         if request.method == "POST":
-            print "*"*150, request.POST, "*"*150
             plandata = {
                 'destination': request.POST['destination'],
                 'description': request.POST['description'],
