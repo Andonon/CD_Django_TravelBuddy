@@ -5,8 +5,6 @@ Coding Dojo Python Django Full Stack App "Travel Buddy"
 Travel Buddy
 Create an application that allows the logged user to add his travel plans and be able to join other users travel plans. 
 
-<img src="http://s3.amazonaws.com/General_V88/boomyeah/company_209/chapter_2993/handouts/chapter2993_5527_option-f-travelbuddy.png" alt="Coding Dojo Assignment Image">
-
 Features required:
 Login and Registration with validations. Validation errors should appear on the page. Logout as well. Password should be at least 8 characters.
 Display the logged user's created/joined travel plans; also displays other users' travel plans. Display should be specific per user.
